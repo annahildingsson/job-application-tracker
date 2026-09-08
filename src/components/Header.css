@@ -1,0 +1,92 @@
+/* Main container for header */
+.header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  /* Center contents */
+  .header-container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Left section */
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #0d00ff;
+    color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .logo-text {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  
+  /* Nav links */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    text-decoration: none;
+    border-radius: 6px;
+  }
+  
+  .nav-link:hover {
+    color: #0f172a;
+  }
+  
+  .nav-link.active {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+  
+  /* Button on right */
+  .btn-primary {
+    background-color: #0d00ff;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4338ca;
+  }
