@@ -1,6 +1,23 @@
 import './ApplicationsTable.css';
 
-function ApplicationTable() {
+// Hjälpfunktion för att välja rätt CSS-klass baserat på status
+function getStatusClass(status) {
+  switch (status.toLowerCase()) {
+    case 'interview':
+      return 'status-interview';
+    case 'applied':
+      return 'status-applied';
+    case 'saved':
+      return 'status-saved';
+    case 'rejected':
+      return 'status-rejected';
+    default:
+      return 'status-saved';
+  }
+}
+
+// Vi tar emot "applications" som en prop i funktionen
+function ApplicationsTable({ applications }) {
   return (
     <div className="table-container">
       <table className="app-table">
@@ -12,38 +29,22 @@ function ApplicationTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="company-name">IKEA</td>
-            <td>Frontend Developer</td>
-            <td>
-              <span className="status-badge status-interview">Interview</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="company-name">SAS</td>
-            <td>Web Developer</td>
-            <td>
-              <span className="status-badge status-applied">Applied</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="company-name">Volvo</td>
-            <td>Software Developer</td>
-            <td>
-              <span className="status-badge status-saved">Saved</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="company-name">Spotify</td>
-            <td>UX Developer</td>
-            <td>
-              <span className="status-badge status-rejected">Rejected</span>
-            </td>
-          </tr>
+          {/* Vi loopar igenom listan med .map() */}
+          {applications.map((app) => (
+            <tr key={app.id}>
+              <td className="company-name">{app.company}</td>
+              <td>{app.position}</td>
+              <td>
+                <span className={`status-badge ${getStatusClass(app.status)}`}>
+                  {app.status}
+                </span>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-export default ApplicationTable;
+export default ApplicationsTable;

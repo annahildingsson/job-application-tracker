@@ -1,6 +1,6 @@
 import "./Header.css"; // import css
 
-function Header() {
+function Header({ onAddJob }) {
   return (
     <header className="header">
       <div className="header-container">
@@ -20,7 +20,10 @@ function Header() {
             Applications
           </a>
         </nav>
-        <button className="btn-primary">+ Add job</button>
+
+        <button className="btn-primary" onClick={onAddJob}>
+          + Add job
+        </button>
       </div>
     </header>
   );

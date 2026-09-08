@@ -1,22 +1,19 @@
-/* Behållaren runt hela tabellen (vit ruta med ram) */
 .table-container {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    overflow: hidden; /* Gör så att hörnflikarna på tabellen runderas snyggt */
+    overflow: hidden; 
     margin-top: 16px;
   }
   
-  /* Själva HTML-tabellen */
   .app-table {
     width: 100%;
-    border-collapse: collapse; /* Tar bort dubbla linjer mellan celler */
+    border-collapse: collapse;
     text-align: left;
     font-size: 14px;
   }
   
-  /* Rubrikraden högst upp (Company, Position, Status) */
   .app-table th {
     background-color: #f8fafc;
     color: #64748b;
@@ -28,30 +25,25 @@
     letter-spacing: 0.05em;
   }
   
-  /* Rader med företag */
   .app-table td {
     padding: 16px 24px;
     border-bottom: 1px solid #f1f5f9;
     color: #334155;
   }
   
-  /* Gör så att sista raden inte har en underlinje */
   .app-table tr:last-child td {
     border-bottom: none;
   }
   
-  /* Ändra bakgrundsfärg när man pekar på en rad */
   .app-table tr:hover {
     background-color: #f8fafc;
   }
   
-  /* Företagsnamnet ska vara lite mörkare och fetare */
   .company-name {
     font-weight: 600;
     color: #0f172a;
   }
   
-  /* Status-piller (Badges) */
   .status-badge {
     display: inline-block;
     padding: 4px 10px;
@@ -60,7 +52,6 @@
     font-weight: 500;
   }
   
-  /* Olika färger för olika statusar */
   .status-interview {
     background-color: #fffbe0;
     color: #b45309;
