@@ -1,28 +1,70 @@
-import './AddJobModal.css';
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import "./AddJobModal.css";
 
-function AddJobModal({ onClose }) {
-  return (
+function AddJobModal({ onClose, onAddJob }) {
+    const [company, setCompany] = useState("");
+    const [position, setPosition] = useState("");
+    const [status, setStatus] = useState("Applied");
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      if (!company || !position) return;
+  
+      const newJob = {
+        id: Date.now(),
+        company,
+        position,
+        status,
+      };
+  
+      onAddJob(newJob);
+      onClose();
+    };
+    
+  return createPortal(
     <div className="modal-overlay">
       <div className="modal-container">
-        <h2 className="modal-title">Add New Application</h2>
+        <h2 className="modal-title">Add New Job</h2>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">Company</label>
-            <input type="text" className="form-input" placeholder="e.g. Spotify" />
+            <input
+              type="text"
+              className="form-input"
+              placeholder="e.g. Spotify"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              required
+            />
           </div>
 
           <div className="form-group">
             <label className="form-label">Position</label>
-            <input type="text" className="form-input" placeholder="e.g. Frontend Developer" />
+            <input
+              type="text"
+              className="form-input"
+              placeholder="e.g. Developer"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              required
+            />
           </div>
 
           <div className="form-group">
             <label className="form-label">Status</label>
-            <select className="form-select">
+            <select
+              className="form-select"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
               <option value="Applied">Applied</option>
               <option value="Interview">Interview</option>
+              <option value="Offer">Offer</option>
               <option value="Saved">Saved</option>
+              <option value="Rejected">Rejected</option>
             </select>
           </div>
 
@@ -36,7 +78,8 @@ function AddJobModal({ onClose }) {
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import StatsCard from "./components/StatsCard";
 import ApplicationTable from "./components/ApplicationsTable";
 import AddJobModal from "./components/AddJobModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const initialApplications = [
@@ -16,8 +16,29 @@ const initialApplications = [
 ];
 
 function App() {
-  const [applications, setApplications] = useState(initialApplications);
+  const [applications, setApplications] = useState(() => {
+    const savedJobs = localStorage.getItem("job_applications");
+    return savedJobs ? JSON.parse(savedJobs) : initialApplications;
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("job_applications", JSON.stringify(applications));
+  }, [applications]);
+
+  const totalSaved = applications.filter(
+    (app) => app.status === "Saved"
+  ).length;
+
+  const totalApplications = applications.length;
+  const totalInterviews = applications.filter(
+    (app) => app.status === "Interview"
+  ).length;
+  
+  const totalOffers = applications.filter(
+    (app) => app.status === "Offer"
+  ).length;
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -25,6 +46,10 @@ function App() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleAddJob = (newJob) => {
+    setApplications((prev) => [newJob, ...prev]);
   };
 
   return (
@@ -39,10 +64,10 @@ function App() {
         </section>
 
         <section className="stats-grid">
-          <StatsCard title="Saved" value="5" />
-          <StatsCard title="Applied" value="24" />
-          <StatsCard title="Interviews" value="6" />
-          <StatsCard title="Offers" value="2" />
+          <StatsCard title="Saved" value={totalSaved} />
+          <StatsCard title="Applications" value={totalApplications} />
+          <StatsCard title="Interviews" value={totalInterviews} />
+          <StatsCard title="Offers" value={totalOffers} />
         </section>
 
         <section className="recent-applications">
@@ -51,10 +76,12 @@ function App() {
             Here's a list of your most recent job applications.
           </p>
           {/* List of applications will be here */}
-          <ApplicationTable applications={initialApplications} />
+          <ApplicationTable applications={applications} />
         </section>
       </main>
-      {isModalOpen && <AddJobModal onClose={handleCloseModal} />}
+      {isModalOpen && (
+        <AddJobModal onClose={handleCloseModal} onAddJob={handleAddJob} />
+      )}
     </div>
   );
 }
