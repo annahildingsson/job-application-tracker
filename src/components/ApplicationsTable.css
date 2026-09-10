@@ -71,3 +71,14 @@
     background-color: #fff1f2;
     color: #be123c;
   }
+
+  button {
+    background-color: #0d00ff;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }

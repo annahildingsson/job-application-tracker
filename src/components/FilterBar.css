@@ -1,0 +1,31 @@
+.filter-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .search-input-wrapper {
+    flex: 1;
+  }
+  
+  .search-input,
+  .status-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #334155;
+    outline: none;
+  }
+  
+  .search-input:focus,
+  .status-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+  
+  .status-filter-wrapper {
+    min-width: 160px;
+  }

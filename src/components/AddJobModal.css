@@ -26,7 +26,6 @@
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
-/* Placerar knapparna längst ner till höger med mellanrum */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -34,7 +33,6 @@
   margin-top: 24px;
 }
 
-/* Grå "Cancel"-knapp */
 .btn-secondary {
   background-color: #f1f5f9;
   color: #475569;
@@ -80,7 +78,6 @@
   z-index: 9999;
 }
 
-/* Själva pop up-rutan */
 .modal-container {
   background-color: #ffffff;
   padding: 32px;

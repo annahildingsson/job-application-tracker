@@ -1,23 +1,28 @@
-import './ApplicationsTable.css';
+import "./ApplicationsTable.css";
 
-// Hjälpfunktion för att välja rätt CSS-klass baserat på status
 function getStatusClass(status) {
   switch (status.toLowerCase()) {
-    case 'interview':
-      return 'status-interview';
-    case 'applied':
-      return 'status-applied';
-    case 'saved':
-      return 'status-saved';
-    case 'rejected':
-      return 'status-rejected';
+    case "interview":
+      return "status-interview";
+    case "applied":
+      return "status-applied";
+    case "saved":
+      return "status-saved";
+    case "rejected":
+      return "status-rejected";
     default:
-      return 'status-saved';
+      return "status-saved";
   }
 }
 
-// Vi tar emot "applications" som en prop i funktionen
-function ApplicationsTable({ applications }) {
+function ApplicationsTable({ applications, onDeleteJob, onUpdateJob }) {
+  if (applications.length === 0) {
+    return (
+      <div className="empty-state">
+        <p>No job applications found.</p>
+      </div>
+    );
+  }
   return (
     <div className="table-container">
       <table className="app-table">
@@ -26,10 +31,10 @@ function ApplicationsTable({ applications }) {
             <th>Company</th>
             <th>Position</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {/* Vi loopar igenom listan med .map() */}
           {applications.map((app) => (
             <tr key={app.id}>
               <td className="company-name">{app.company}</td>
@@ -38,6 +43,15 @@ function ApplicationsTable({ applications }) {
                 <span className={`status-badge ${getStatusClass(app.status)}`}>
                   {app.status}
                 </span>
+              </td>
+              <td>
+                <button
+                  className="btn-delete"
+                  onClick={() => onDeleteJob(job.id)}
+                  title="Delete application"
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import StatsCard from "./components/StatsCard";
 import ApplicationTable from "./components/ApplicationsTable";
 import AddJobModal from "./components/AddJobModal";
+import FilterBar from "./components/FilterBar"; // 1. Importera FilterBar
 import { useState, useEffect } from "react";
 import "./App.css";
 
@@ -13,6 +14,9 @@ const initialApplications = [
     status: "Interview",
   },
   { id: 2, company: "SAS", position: "Web Developer", status: "Applied" },
+  { id: 3, company: "Spotify", position: "Backend Developer", status: "Saved" },
+  { id: 4, company: "Google", position: "Fullstack Developer", status: "Offer" },
+  { id: 5, company: "Amazon", position: "Software Engineer", status: "Rejected" },
 ];
 
 function App() {
@@ -23,33 +27,43 @@ function App() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
+
   useEffect(() => {
     localStorage.setItem("job_applications", JSON.stringify(applications));
   }, [applications]);
 
-  const totalSaved = applications.filter(
-    (app) => app.status === "Saved"
-  ).length;
+  const filteredApplications = applications.filter((app) => {
+    const matchesSearch =
+      app.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      app.position.toLowerCase().includes(searchTerm.toLowerCase());
 
+    const matchesStatus = statusFilter === "All" || app.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
+
+  const totalSaved = applications.filter((app) => app.status === "Saved").length;
   const totalApplications = applications.length;
-  const totalInterviews = applications.filter(
-    (app) => app.status === "Interview"
-  ).length;
-  
-  const totalOffers = applications.filter(
-    (app) => app.status === "Offer"
-  ).length;
+  const totalInterviews = applications.filter((app) => app.status === "Interview").length;
+  const totalOffers = applications.filter((app) => app.status === "Offer").length;
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const handleAddJob = (newJob) => {
     setApplications((prev) => [newJob, ...prev]);
+  };
+
+  const handleDeleteJob = (jobId) => {
+    setApplications((prev) => prev.filter((job) => job.id !== jobId));
+  };
+
+  const handleUpdateJob = (updatedJob) => {
+    setApplications((prev) =>
+      prev.map((job) => (job.id === updatedJob.id ? updatedJob : job))
+    );
   };
 
   return (
@@ -75,10 +89,22 @@ function App() {
           <p className="recent-applications-subtitle">
             Here's a list of your most recent job applications.
           </p>
-          {/* List of applications will be here */}
-          <ApplicationTable applications={applications} />
+
+          <FilterBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            statusFilter={statusFilter}
+            setStatusFilter={setStatusFilter}
+          />
+
+          <ApplicationTable
+            applications={filteredApplications}
+            onDeleteJob={handleDeleteJob}
+            onUpdateJob={handleUpdateJob}
+          />
         </section>
       </main>
+
       {isModalOpen && (
         <AddJobModal onClose={handleCloseModal} onAddJob={handleAddJob} />
       )}

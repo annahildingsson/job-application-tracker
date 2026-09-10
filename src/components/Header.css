@@ -7,7 +7,6 @@
     z-index: 10;
   }
   
-  /* Center contents */
   .header-container {
     max-width: 1024px;
     margin: 0 auto;
@@ -17,31 +16,16 @@
     justify-content: space-between;
   }
   
-  /* Left section */
   .header-left {
     display: flex;
     align-items: center;
     gap: 32px;
   }
   
-  /* Logo */
   .logo {
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-  
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-    background-color: #0d00ff;
-    color: #ffffff;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
   }
   
   .logo-text {
@@ -50,7 +34,6 @@
     color: #0f172a;
   }
   
-  /* Nav links */
   .nav-links {
     display: flex;
     align-items: center;
@@ -75,7 +58,6 @@
     color: #0f172a;
   }
   
-  /* Button on right */
   .btn-primary {
     background-color: #0d00ff;
     color: #ffffff;
