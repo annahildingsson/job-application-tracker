@@ -1,21 +1,6 @@
 import "./ApplicationsTable.css";
 
-function getStatusClass(status) {
-  switch (status.toLowerCase()) {
-    case "interview":
-      return "status-interview";
-    case "applied":
-      return "status-applied";
-    case "saved":
-      return "status-saved";
-    case "rejected":
-      return "status-rejected";
-    default:
-      return "status-saved";
-  }
-}
-
-function ApplicationsTable({ applications, onDeleteJob, onUpdateJob }) {
+function ApplicationTable({ applications, onUpdateJob, onEditJob }) {
   if (applications.length === 0) {
     return (
       <div className="empty-state">
@@ -23,42 +8,46 @@ function ApplicationsTable({ applications, onDeleteJob, onUpdateJob }) {
       </div>
     );
   }
+
   return (
-    <div className="table-container">
-      <table className="app-table">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th>Position</th>
-            <th>Status</th>
-            <th></th>
+    <table className="app-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Position</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {applications.map((job) => (
+          <tr
+            key={job.id}
+            className="clickable-row"
+            onClick={() => onEditJob(job)}
+          >
+            <td className="font-medium">{job.company}</td>
+            <td>{job.position}</td>
+            <td onClick={(e) => e.stopPropagation()}>
+              <select
+                className={`status-badge status-${job.status.toLowerCase()}`}
+                value={job.status}
+                onChange={(e) =>
+                  onUpdateJob({ ...job, status: e.target.value })
+                }
+              >
+                <option value="Saved">Saved</option>
+                <option value="Applied">Applied</option>
+                <option value="Test">Test</option>
+                <option value="Interview">Interview</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {applications.map((app) => (
-            <tr key={app.id}>
-              <td className="company-name">{app.company}</td>
-              <td>{app.position}</td>
-              <td>
-                <span className={`status-badge ${getStatusClass(app.status)}`}>
-                  {app.status}
-                </span>
-              </td>
-              <td>
-                <button
-                  className="btn-delete"
-                  onClick={() => onDeleteJob(job.id)}
-                  title="Delete application"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
-export default ApplicationsTable;
+export default ApplicationTable;

@@ -2,9 +2,11 @@ import Header from "./components/Header";
 import StatsCard from "./components/StatsCard";
 import ApplicationTable from "./components/ApplicationsTable";
 import AddJobModal from "./components/AddJobModal";
-import FilterBar from "./components/FilterBar"; // 1. Importera FilterBar
+import FilterBar from "./components/FilterBar";
+import EditJobModal from "./components/EditJobModal";
 import { useState, useEffect } from "react";
 import "./App.css";
+
 
 const initialApplications = [
   {
@@ -15,8 +17,18 @@ const initialApplications = [
   },
   { id: 2, company: "SAS", position: "Web Developer", status: "Applied" },
   { id: 3, company: "Spotify", position: "Backend Developer", status: "Saved" },
-  { id: 4, company: "Google", position: "Fullstack Developer", status: "Offer" },
-  { id: 5, company: "Amazon", position: "Software Engineer", status: "Rejected" },
+  {
+    id: 4,
+    company: "Google",
+    position: "Fullstack Developer",
+    status: "Offer",
+  },
+  {
+    id: 5,
+    company: "Amazon",
+    position: "Software Engineer",
+    status: "Rejected",
+  },
 ];
 
 function App() {
@@ -44,10 +56,16 @@ function App() {
     return matchesSearch && matchesStatus;
   });
 
-  const totalSaved = applications.filter((app) => app.status === "Saved").length;
+  const totalSaved = applications.filter(
+    (app) => app.status === "Saved"
+  ).length;
   const totalApplications = applications.length;
-  const totalInterviews = applications.filter((app) => app.status === "Interview").length;
-  const totalOffers = applications.filter((app) => app.status === "Offer").length;
+  const totalInterviews = applications.filter(
+    (app) => app.status === "Interview"
+  ).length;
+  const totalOffers = applications.filter(
+    (app) => app.status === "Offer"
+  ).length;
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -65,6 +83,8 @@ function App() {
       prev.map((job) => (job.id === updatedJob.id ? updatedJob : job))
     );
   };
+
+  const [editingJob, setEditingJob] = useState(null);
 
   return (
     <div className="app-bg">
@@ -101,12 +121,20 @@ function App() {
             applications={filteredApplications}
             onDeleteJob={handleDeleteJob}
             onUpdateJob={handleUpdateJob}
+            onEditJob={(job) => setEditingJob(job)}
           />
         </section>
       </main>
 
       {isModalOpen && (
         <AddJobModal onClose={handleCloseModal} onAddJob={handleAddJob} />
+      )}
+      {editingJob && (
+        <EditJobModal
+          job={editingJob}
+          onClose={() => setEditingJob(null)}
+          onUpdateJob={handleUpdateJob}
+        />
       )}
     </div>
   );

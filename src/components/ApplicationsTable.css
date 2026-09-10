@@ -1,84 +1,90 @@
 .table-container {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    overflow: hidden; 
-    margin-top: 16px;
-  }
-  
-  .app-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    font-size: 14px;
-  }
-  
-  .app-table th {
-    background-color: #f8fafc;
-    color: #64748b;
-    font-weight: 600;
-    padding: 12px 24px;
-    border-bottom: 1px solid #e2e8f0;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 0.05em;
-  }
-  
-  .app-table td {
-    padding: 16px 24px;
-    border-bottom: 1px solid #f1f5f9;
-    color: #334155;
-  }
-  
-  .app-table tr:last-child td {
-    border-bottom: none;
-  }
-  
-  .app-table tr:hover {
-    background-color: #f8fafc;
-  }
-  
-  .company-name {
-    font-weight: 600;
-    color: #0f172a;
-  }
-  
-  .status-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 500;
-  }
-  
-  .status-interview {
-    background-color: #fffbe0;
-    color: #b45309;
-  }
-  
-  .status-applied {
-    background-color: #eff6ff;
-    color: #1d4ed8;
-  }
-  
-  .status-saved {
-    background-color: #f1f5f9;
-    color: #475569;
-  }
-  
-  .status-rejected {
-    background-color: #fff1f2;
-    color: #be123c;
-  }
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  margin-top: 16px;
+}
 
-  button {
-    background-color: #0d00ff;
-    color: #ffffff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-  }
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.app-table th {
+  background-color: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.app-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.app-table tr:last-child td {
+  border-bottom: none;
+}
+
+.app-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.company-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-saved {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.status-applied {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+.status-test {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+.status-interview {
+  background-color: #fffbe0;
+  color: #b45309;
+}
+.status-offer {
+  background-color: #ecfdf5;
+  color: #15803d;
+}
+.status-rejected {
+  background-color: #fff1f2;
+  color: #be123c;
+}
+
+button {
+  background-color: #0d00ff;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
